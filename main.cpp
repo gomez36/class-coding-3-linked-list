@@ -30,7 +30,16 @@ void addNode(struct Node *head, int n) {
   //TODO - Implement this function.
     Node* curr = head;
     Node* newNode = new Node();
+    /*
+     * Node* newNode <<not working, since it only creates the pointer without object
+     * new Node() : new an object for the pointer
+     */
     newNode->data = n;
+    /*
+     * newNode is a structure pointer(Node is a structure), and it points to the object ( created by new Node() )
+     * newNode ->data: newNode points to the data inside the structure
+     * newNode ->data = n : assign n to the data inside the object newNode is point to
+     */
     //iterate to the node before the last node
     while(curr->next!= nullptr){
         curr = curr->next;
