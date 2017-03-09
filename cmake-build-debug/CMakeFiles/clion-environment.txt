@@ -1,0 +1,1 @@
+CMake: 3.6.3@/home/elizahua2017spring/program/clion-2016.3.3/bin/cmake/bin/cmake

@@ -1,0 +1,3 @@
+/home/elizahua2017spring/Documents/csc340/classCoding3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/elizahua2017spring/Documents/csc340/classCoding3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/elizahua2017spring/Documents/csc340/classCoding3/cmake-build-debug/CMakeFiles/simpleLinkedList.dir
