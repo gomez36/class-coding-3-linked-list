@@ -33,7 +33,7 @@ void addNode(struct Node *head, int n) {
 
 
     while(current!= nullptr) {
-        c
+
         current = current->next;
 
     }
