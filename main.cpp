@@ -70,6 +70,10 @@ void insertFront(struct Node **head, int n) {
  */
 void display(struct Node *head) {
     Node* current = head;
+    if(head== nullptr){
+        std::cout<<"empty list";
+        return;
+    }
     do{
         std::cout<<current->data<<' ';
         current=current->next;
@@ -177,12 +181,15 @@ int compareLinkedList(struct Node *node1, struct Node *node2) {
 }
 
 void deleteLinkedList(struct Node **node) {
-  struct Node *tmpNode;
-  while (*node) {
+    struct Node *tmpNode;
     tmpNode = *node;
-    *node = tmpNode->next;
-    delete tmpNode;
-  }
+    while (*node|| *node!= nullptr ) {
+
+        *node = tmpNode->next;
+        delete tmpNode;
+        tmpNode = *node;
+    }
+
 }
 
 int main() {
@@ -246,6 +253,7 @@ int main() {
 
   cout << endl;
   cout << "Deleting the copied list\n";
+
   deleteLinkedList(&newHead);
   display(newHead);
 
