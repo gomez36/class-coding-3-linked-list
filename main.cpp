@@ -55,7 +55,11 @@ void addNode(struct Node *head, int n) {
  */
 void insertFront(struct Node **head, int n) {
   //since we're going to modify the head pointer
-  //TODO
+    Node* newHead = new Node();
+    newHead->data = n;
+    newHead->next = *head;
+    *head = newHead;
+
 }
 
 /**
@@ -65,9 +69,10 @@ void insertFront(struct Node **head, int n) {
 void display(struct Node *head) {
     Node* current = head;
     do{
-        std::cout<<current->data;
+        std::cout<<current->data<<' ';
         current=current->next;
     }while(current!= nullptr);
+    std::cout<<endl;
   //TODO
 }
 
@@ -79,6 +84,13 @@ void display(struct Node *head) {
  */
 struct Node *searchNode(struct Node *head, int n) {
   //TODO
+    Node* current = head;
+    while(current!= nullptr){
+        if(current->data ==n ) return current;
+
+        //flash the iterator
+        current = current->next;
+    }
   return NULL;
 }
 
@@ -90,6 +102,25 @@ struct Node *searchNode(struct Node *head, int n) {
  */
 bool deleteNode(struct Node **head, Node *ptrDel) {
   //TODO
+    //check the pointer is the head
+    if(*head==ptrDel){
+        *head = ptrDel->next;
+        return true;
+    }
+    Node* current = *head;
+    while(current->next!= nullptr) {
+        if(current->next == ptrDel) {
+            current->next = current->next;
+            return true;
+        }
+        current = current->next;
+
+    }
+    //if the delete node is the last node
+    if(current->next==ptrDel){
+        current->next = current ->next;
+        return true;
+    }
   return false;
 }
 
@@ -161,7 +192,7 @@ int main() {
   display(head);
 
   addNode(head,20);
-  display(head);/*
+  display(head);
 
   addNode(head,30);
   display(head);
@@ -215,6 +246,6 @@ int main() {
   cout << "Deleting the copied list\n";
   deleteLinkedList(&newHead);
   display(newHead);
-   */
+
   return 0;
 }
