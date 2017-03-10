@@ -1,6 +1,8 @@
 //04_simple linked list
 //!!!SOLUTION!!
-
+/*
+ * contribution : Miguel GOmex, Omar Alaniz, Elizabeth Huang, Saengduean Calderaz
+ */
 #include <iostream>
 
 using namespace std;
