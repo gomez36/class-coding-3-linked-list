@@ -181,15 +181,12 @@ int compareLinkedList(struct Node *node1, struct Node *node2) {
 }
 
 void deleteLinkedList(struct Node **node) {
-    struct Node *tmpNode;
-    tmpNode = *node;
-    while (*node|| *node!= nullptr ) {
-
+    struct Node*tmpNode;
+    while(*node) {
+        tmpNode = *node;
         *node = tmpNode->next;
         delete tmpNode;
-        tmpNode = *node;
     }
-
 }
 
 int main() {
