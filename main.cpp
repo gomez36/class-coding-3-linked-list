@@ -196,7 +196,7 @@ void copyLinkedList(struct Node *node, struct Node **pNew) {
      */
     //using recursive
     if(node!=NULL){ //assume the head is not the last element of parent list
-        *pNew = new Node; /
+        *pNew = new Node; 
         //if the sub-list exist, then we copy the head
         (*pNew)->data = node->data;
         copyLinkedList(node->next,&((*pNew)->next));
@@ -207,10 +207,25 @@ void copyLinkedList(struct Node *node, struct Node **pNew) {
 /* Compare two linked list */
 /* return value: same(1), different(0) */
 int compareLinkedList(struct Node *node1, struct Node *node2) {
+
+    //special case: both list1 and list2 are empty
+    if(!node1 && !node2) return 1;
+
+    if(!node1 || !node2) return 0; //if either one is longer than another
+    else if(node1->data!=node2->data) return 0; //the data is not match
+    else compareLinkedList(node1->next,node2->next);
+
+    return 1;
 }
 
 void deleteLinkedList(struct Node **node) {
-
+    //delete from head to the tail
+    struct Node* temp;
+    while(*node){//while not reach the end
+        temp = *node;
+        *node = temp->next; //move the tag to the next
+        delete temp;  //delete the current node
+    }
 }
 
 int main() {
@@ -234,7 +249,7 @@ int main() {
   display(head);
 
     std::cout<<foo(head);
-/*
+
   insertFront(&head,5);
   display(head);
 
@@ -279,6 +294,6 @@ int main() {
 
   deleteLinkedList(&newHead);
   display(newHead);
-*/
+
   return 0;
 }
