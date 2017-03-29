@@ -3,6 +3,7 @@
 /*
  * contribution : Miguel GOmex, Omar Alaniz, Elizabeth Huang, Saengduean Calderaz
  */
+//note : always consider the possibility of NULL list, first, middle , last
 #include <iostream>
 
 using namespace std;
@@ -130,18 +131,77 @@ struct Node *searchNode(struct Node *head, int n) {
  * @param ptrDel - pointer to the node that is to be deleted
  * @return - boolean that indicates if the deletion was successful
  */
-bool deleteNode(struct Node **head, Node *ptrDel) {
-
+bool deleteNode(struct Node **head, Node *ptrDel){
+    Node* current = *head;
+    if(current==nullptr) return false;
+    while(current!=ptrDel){
+        if(!current) return false;
+        current = current->next;
+    }
+    current = current ->next;
+    return true;
 }
 
 /* reverse the list */
 struct Node *reverse(struct Node **head) {
+    /*
+     * o(chain first,head)-->o(stack first)-->o(stack second)-->...
+     */
+    //set up model for stack and chain
+    Node* chainFirst = *head;
+    Node* stackFirst = chainFirst->next;
+    Node* stackSecond = stackFirst->next;
 
+    chainFirst->next = nullptr; //make the first node as the last
+    /*
+    * chain: o(chain first,head)-->
+    * stack: o(stack first)-->o(stack second)-->o-->o-->...
+    */
+    while(stackSecond){
+        stackFirst->next = chainFirst; //move the first element in stack to first element in chain
+        /*
+        * chain: o(stack first)-->o(chain first)-->o-->o-->......o(head)-->
+        * stack: o(stack second)-->o-->o-->...
+        */
+
+        //change the tag of element
+        chainFirst=stackFirst;
+        stackFirst=stackSecond;
+        stackSecond=stackFirst->next;
+    }
+    /* after the loop
+    * chain: o(chain first)-->o-->o-->......o(head)-->
+    * stack: o(stack first)-->    (stack second)
+    */
+    stackFirst->next=chainFirst;
+    /* after the loop
+    * chain: o(stack first)-->o(chain first)-->o-->o-->......o(head)-->
+    * stack:     (stack second)
+    */
+    *head=stackFirst;
+    /* after the loop
+    * chain: o(stack first,head)-->o(chain first)-->o-->o-->......o-->
+    * stack:     (stack second)
+    */
+    return *head;
 }
 
 /* Creating a copy of a linked list */
 void copyLinkedList(struct Node *node, struct Node **pNew) {
-
+    /*
+     * we consider a list, n element, has n sub-list
+     * every element is a new sub-list's head
+     * e.g: (element1, head1)-->(element2,head2)-->(element3,head3)-->...(elementn, head n)-->
+     * **pNew is consider as container to create head
+     */
+    //using recursive
+    if(node!=NULL){ //assume the head is not the last element of parent list
+        *pNew = new Node; /
+        //if the sub-list exist, then we copy the head
+        (*pNew)->data = node->data;
+        copyLinkedList(node->next,&((*pNew)->next));
+        //pass the sub-list and corresponding position
+    }
 }
 
 /* Compare two linked list */
