@@ -7,11 +7,35 @@
 
 using namespace std;
 
+//recursive function link list accept node * go through all list and add up all items
+
+
+
 struct Node {
   int data;
   Node *next;
 };
 
+//a recursive function go through all the data , and add up all value
+int foo(Node* n){
+    /*Node* current = n;
+    int sum = 0;
+    //base case
+    if(current== nullptr) return 0;
+    while(current!= nullptr){
+        sum += foo(current->next);
+    }*/
+    if(n->next==nullptr){
+        return n->data;
+    }else{
+        return(n->data+foo(n->next));
+    }
+
+}
+
+void reverse(Node* n) { //a function reverse the entire linked list
+
+}
 /**
  * This is only for the 1st Node
  * @param head - pointer to the head of the list
@@ -107,86 +131,26 @@ struct Node *searchNode(struct Node *head, int n) {
  * @return - boolean that indicates if the deletion was successful
  */
 bool deleteNode(struct Node **head, Node *ptrDel) {
-  //TODO
-    //check the pointer is the head
-    if(*head==ptrDel){
-        *head = ptrDel->next;
-        return true;
-    }
-    Node* current = *head;
-    while(current->next!= nullptr) {
-        if(current->next == ptrDel) {
-            current->next = current->next;
-            return true;
-        }
-        current = current->next;
 
-    }
-    //if the delete node is the last node
-    if(current->next==ptrDel){
-        current->next = current ->next;
-        return true;
-    }
-  return false;
 }
 
 /* reverse the list */
 struct Node *reverse(struct Node **head) {
-  Node *parent = *head;
-  Node *me = parent->next;
-  Node *child = me->next;
 
-  /* make parent as tail */
-  parent->next = NULL;
-  while (child) {
-    me->next = parent;
-    parent = me;
-    me = child;
-    child = child->next;
-  }
-  me->next = parent;
-  *head = me;
-  return *head;
 }
 
 /* Creating a copy of a linked list */
 void copyLinkedList(struct Node *node, struct Node **pNew) {
-  if (node != NULL) {
-    *pNew = new Node;
-    (*pNew)->data = node->data;
-    (*pNew)->next = NULL;
-    copyLinkedList(node->next, &((*pNew)->next));
-  }
+
 }
 
 /* Compare two linked list */
 /* return value: same(1), different(0) */
 int compareLinkedList(struct Node *node1, struct Node *node2) {
-  static int flag;
-
-  /* both lists are NULL */
-  if (node1 == NULL && node2 == NULL) {
-    flag = 1;
-  }
-  else {
-    if (node1 == NULL || node2 == NULL)
-      flag = 0;
-    else if (node1->data != node2->data)
-      flag = 0;
-    else
-      compareLinkedList(node1->next, node2->next);
-  }
-
-  return flag;
 }
 
 void deleteLinkedList(struct Node **node) {
-    struct Node*tmpNode;
-    while(*node) {
-        tmpNode = *node;
-        *node = tmpNode->next;
-        delete tmpNode;
-    }
+
 }
 
 int main() {
@@ -209,6 +173,8 @@ int main() {
   addNode(head,40);
   display(head);
 
+    std::cout<<foo(head);
+/*
   insertFront(&head,5);
   display(head);
 
@@ -253,6 +219,6 @@ int main() {
 
   deleteLinkedList(&newHead);
   display(newHead);
-
+*/
   return 0;
 }
